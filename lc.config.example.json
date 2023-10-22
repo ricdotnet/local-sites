@@ -1,0 +1,8 @@
+{
+  "config_file": "openssl.conf",
+  "ssl_dir": "/path/to/store/certificates",
+  "nginx_dir": "/path/to/store/nginx/configs",
+  "authority_name": "CA Name",
+  "organisation_name": "CA Org",
+  "common_name": "CA CN"
+}
