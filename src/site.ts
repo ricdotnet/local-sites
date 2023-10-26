@@ -1,7 +1,6 @@
 import fs from "fs/promises";
 import path from "path";
 import os from "os";
-import process from "process";
 import { Config } from "../types";
 import { OpenSSL } from "./openssl";
 
@@ -33,7 +32,7 @@ export class Site {
       this.CRT = crt;
     }
 
-    const nginxConf = await fs.readFile(path.join(process.cwd(), 'src', 'stubs', nginxConfName));
+    const nginxConf = await fs.readFile(path.join(__dirname, 'stubs', nginxConfName));
     let domainConf = nginxConf.toString()
       .replace('{{DOMAIN}}', this.DOMAIN)
       .replace('{{TARGET_PORT}}', this.PORT.toString());

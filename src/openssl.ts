@@ -48,9 +48,9 @@ export class OpenSSL {
   async generateCertificate () {
     console.log('Generating Certificate for', this.DOMAIN, '...');
 
-    const opensslConf = await fs.readFile(path.join(process.cwd(), 'src', 'stubs', 'openssl.conf'));
+    const opensslConf = await fs.readFile(path.join(__dirname, 'stubs', 'openssl.conf'));
     const tempOpenSslConf = opensslConf.toString().replace('{{DOMAIN}}', this.DOMAIN);
-    const tempOpenSslConfPath = path.join(process.cwd(), 'src', 'stubs', 'temp-openssl.conf');
+    const tempOpenSslConfPath = path.join(__dirname, 'stubs', 'temp-openssl.conf');
 
     await fs.writeFile(tempOpenSslConfPath, tempOpenSslConf);
 
@@ -68,7 +68,7 @@ export class OpenSSL {
     await Utils.execp(`openssl req -new -nodes -newkey rsa:2048 -keyout ${keyFN} -out ${csrFN} -subj "/C=GB/O=${this.config.organisation_name}/CN=${this.config.common_name}"`);
     await Utils.execp(`openssl x509 -req -sha256 -days 1024 -in ${csrFN} -CA ${caPem} -CAkey ${caKey} -CAcreateserial -extfile ${tempOpenSslConfPath} -out ${crtFN}`);
 
-    await fs.rm(path.join(process.cwd(), 'src', 'stubs', 'temp-openssl.conf'));
+    await fs.rm(path.join(__dirname, 'stubs', 'temp-openssl.conf'));
 
     console.log('Generated Certificate for', this.DOMAIN);
 

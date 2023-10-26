@@ -1,6 +1,7 @@
+#!/usr/bin/env node
+
 import commander from 'commander';
 import config from './lc.config.json';
-import { OpenSSL } from './src/openssl';
 import { Site } from "./src/site";
 import { Utils } from "./src/utils";
 

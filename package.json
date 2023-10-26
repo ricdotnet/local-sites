@@ -1,11 +1,14 @@
 {
-  "name": "local_certificates",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.ts",
+  "name": "local_sites",
+  "version": "0.0.1",
+  "description": "A small package to help me with creating nginx sites and certificates for local development.",
+  "main": "index.js",
+  "bin": {
+    "localsite": "./index.js"
+  },
   "scripts": {
     "dev": "export NODE_ENV=development && ts-node .",
-    "build": "tsc"
+    "build": "sh build.sh"
   },
   "keywords": [],
   "author": "",
