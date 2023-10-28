@@ -1,5 +1,5 @@
 {
-  "name": "local_sites",
+  "name": "@ricdotnet/local-sites",
   "version": "0.0.1",
   "description": "A small package to help me with creating nginx sites and certificates for local development.",
   "main": "./dist/index.js",
@@ -11,7 +11,7 @@
     "build": "sh build.sh"
   },
   "keywords": [],
-  "author": "",
+  "author": "Ricardo Rocha aka ricdotnet <me@rrocha.uk>",
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^20.8.7",

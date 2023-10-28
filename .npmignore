@@ -1,3 +1,6 @@
+.vscode
+.idea
+
 /src
 build.sh
 index.ts
