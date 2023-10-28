@@ -2,7 +2,7 @@
 
 echo "Preparing and building ..."
 
-if [[ -d "./build" ]]; then
+if [ -d "./build" ]; then
   echo "Removing old build ..."
   rm -r ./build
 fi
