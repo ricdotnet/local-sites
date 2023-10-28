@@ -2,9 +2,9 @@
   "name": "local_sites",
   "version": "0.0.1",
   "description": "A small package to help me with creating nginx sites and certificates for local development.",
-  "main": "index.js",
+  "main": "./dist/index.js",
   "bin": {
-    "localsite": "./index.js"
+    "localsite": "./dist/index.js"
   },
   "scripts": {
     "dev": "export NODE_ENV=development && ts-node .",

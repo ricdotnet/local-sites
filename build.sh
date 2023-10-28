@@ -2,17 +2,16 @@
 
 echo "Preparing and building ..."
 
-if [ -d "./build" ]; then
+if [ -d "./dist" ]; then
   echo "Removing old build ..."
-  rm -r ./build
+  rm -r ./dist
 fi
 
 echo "Compiling ..."
 tsc -b
 
-echo "Copying stubs and package.json ..."
-mkdir ./build/src/stubs
-cp ./src/stubs/* ./build/src/stubs
-cp ./package.json ./build
+echo "Copying stubs ..."
+mkdir ./dist/src/stubs
+cp ./src/stubs/* ./dist/src/stubs
 
 echo "All complete!"
