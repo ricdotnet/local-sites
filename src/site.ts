@@ -58,6 +58,11 @@ export class Site {
   }
 
   private nginxDir () {
-    return this.config.nginx_dir ?? path.join(os.homedir(), '.config', 'nginx');
+    if (!this.config.nginx_dir || this.config.nginx_dir === '') {
+      console.warn('No nginx_dir defined on config file. Using ~/.config/nginx')
+      return path.join(os.homedir(), '.config', 'nginx');
+    }
+
+    return this.config.nginx_dir;
   }
 }

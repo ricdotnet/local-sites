@@ -1,0 +1,7 @@
+{
+  "ssl_dir": "",
+  "nginx_dir": "",
+  "authority_name": "Authority Name CA",
+  "organisation_name": "Authority Name Org",
+  "common_name": "Authority Name CN"
+}

@@ -2,5 +2,5 @@
 /build
 /dist
 
-lc.config.json
+dev.lc.config.json
 package-lock.json

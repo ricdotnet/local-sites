@@ -2,17 +2,18 @@
   "name": "@ricdotnet/local-sites",
   "version": "0.0.2",
   "description": "A small package to help me with creating nginx sites and certificates for local development.",
+  "keywords": [],
+  "author": "Ricardo Rocha <me@rrocha.uk> (https://ricr.dev)",
+  "license": "ISC",
+  "repository": "github:ricdotnet/local-sites",
   "main": "./dist/index.js",
   "bin": {
     "localsite": "./dist/index.js"
   },
   "scripts": {
-    "dev": "export NODE_ENV=development && ts-node .",
+    "dev": "export NODE_ENV=development && ts-node index.ts",
     "build": "sh build.sh"
   },
-  "keywords": [],
-  "author": "Ricardo Rocha aka ricdotnet <me@rrocha.uk>",
-  "license": "ISC",
   "devDependencies": {
     "@types/node": "^20.8.7",
     "ts-node": "^10.9.1",

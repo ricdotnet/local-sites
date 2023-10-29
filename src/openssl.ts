@@ -76,7 +76,12 @@ export class OpenSSL {
   }
 
   private sslDir () {
-    return this.config.ssl_dir ?? path.join(os.homedir(), '.config', 'ssl');
+    if (!this.config.ssl_dir || this.config.ssl_dir === '') {
+      console.warn('No ssl_dir property defined on config file. Using ~/.config/ssl');
+      return path.join(os.homedir(), '.config', 'ssl');
+    }
+
+    return this.config.ssl_dir;
   }
 
   private async caCertificateExists () {
