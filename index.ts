@@ -5,6 +5,7 @@ import path from "path";
 import commander from 'commander';
 import { Site } from "./src/site";
 import { Utils } from "./src/utils";
+const devMode = process.env.NODE_ENV === 'development';
 
 const command: commander.Command = commander.createCommand();
 command
@@ -37,11 +38,11 @@ const { domain, port, secure, init } = command.opts();
 })();
 
 async function importConfig() {
-  const configFileName = process.env.NODE_ENV === 'development'
-    ? 'dev.lc.config.json'
-    : 'lc.config.json';
+  const configFile = devMode
+    ? path.join(__dirname, 'dev.lc.config.json')
+    : path.join(__dirname, '..', 'lc.config.json');
   try {
-    return await import(path.join(__dirname, configFileName));
+    return await import(configFile);
   } catch (_) {
     return console.error('You need to create a config file. Use localsite --init');
   }
@@ -52,7 +53,11 @@ async function createConfigFile() {
     return console.warn('A config file already exists.');
   }
 
-  const configStub = await Utils.readFile(path.join(__dirname, 'src', 'stubs', 'lc.config.json'));
+  const stubFile = devMode
+      ? path.join(__dirname, 'src', 'stubs', 'lc.config.json')
+      : path.join(__dirname, 'dist', 'src', 'stubs', 'lc.config.json');
+
+  const configStub = await Utils.readFile(stubFile);
   await Utils.createFile(path.join(__dirname, 'lc.config.json'), configStub);
 
   console.log('Config file created');
