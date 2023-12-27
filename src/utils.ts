@@ -22,6 +22,17 @@ export class Utils {
     return fileContent.toString();
   }
 
+  static async dirExists(path: string): Promise<boolean> {
+    return new Promise(async (resolve) => {
+      try {
+        await fs.readdir(path);
+        resolve(true);
+      } catch (err) {
+        resolve(false);
+      }
+    });
+  }
+
   static async createDir(path: string): Promise<void> {
     return await fs.mkdir(path);
   }

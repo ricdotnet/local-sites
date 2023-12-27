@@ -1,0 +1,7 @@
+{
+  "ssl_dir": "{{SSL_DIR}}",
+  "nginx_dir": "{{NGINX_DIR}}",
+  "authority_name": "{{CONFIG_AN}}",
+  "organisation_name": "{{CONFIG_ON}}",
+  "common_name": "{{CONFIG_CN}}"
+}

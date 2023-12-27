@@ -2,6 +2,6 @@
 /build
 /dist
 
-dev.lc.config.json
-lc.config.json
+dev.localsites.config.json
+localsites.config.json
 package-lock.json

@@ -114,5 +114,5 @@
     "skipLibCheck": true
     /* Skip type checking all .d.ts files. */
   },
-  "exclude": ["./dev.lc.config.json"]
+  "exclude": ["./dev.localsites.config.json"]
 }
