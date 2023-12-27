@@ -3,4 +3,5 @@
 /dist
 
 dev.lc.config.json
+lc.config.json
 package-lock.json

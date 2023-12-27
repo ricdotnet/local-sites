@@ -1,8 +1,8 @@
-import fs from "fs/promises";
-import { exec } from "child_process";
+import fs from 'fs/promises';
+import { exec } from 'child_process';
 
 export class Utils {
-  static fileExists (path: string): Promise<boolean> {
+  static fileExists(path: string): Promise<boolean> {
     return new Promise(async (resolve) => {
       try {
         await fs.readFile(path);
@@ -13,16 +13,20 @@ export class Utils {
     });
   }
 
-  static async createFile (path: string, data: string): Promise<void> {
+  static async createFile(path: string, data: string): Promise<void> {
     await fs.writeFile(path, data);
   }
 
-  static async readFile (path: string): Promise<string> {
+  static async readFile(path: string): Promise<string> {
     const fileContent = await fs.readFile(path);
     return fileContent.toString();
   }
 
-  static execp (command: string) {
+  static async createDir(path: string): Promise<void> {
+    return await fs.mkdir(path);
+  }
+
+  static execp(command: string) {
     return new Promise((resolve, reject) => {
       const cmd = exec(command);
       cmd.on('error', (error) => {

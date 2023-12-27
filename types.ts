@@ -5,4 +5,4 @@ export type Config = {
   authority_name: string;
   organisation_name: string;
   common_name: string;
-}
+};

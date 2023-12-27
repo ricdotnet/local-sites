@@ -1,8 +1,8 @@
-import fs from "fs/promises";
-import path from "path";
-import os from "os";
-import { Config } from "../types";
-import { OpenSSL } from "./openssl";
+import fs from 'fs/promises';
+import path from 'path';
+import os from 'os';
+import { Config } from '../types';
+import { OpenSSL } from './openssl';
 
 export class Site {
   private readonly config: Config;
@@ -13,7 +13,7 @@ export class Site {
   private CRT: string | null = null;
   private KEY: string | null = null;
 
-  constructor (config: Config, domain: string, port: number, secure: boolean) {
+  constructor(config: Config, domain: string, port: number, secure: boolean) {
     this.config = config;
     this.DOMAIN = domain;
     this.PORT = port;
@@ -23,17 +23,22 @@ export class Site {
   async createSite() {
     console.log('Creating a site for domain', this.DOMAIN, '...');
 
-    const nginxConfName = this.SECURE ? 'nginx.secure.conf' : 'nginx.unsecure.conf';
+    const nginxConfName = this.SECURE
+      ? 'nginx.secure.conf'
+      : 'nginx.unsecure.conf';
 
     // generate certificates and get names and directories
     if (this.SECURE) {
-      const { key, crt} = await this.secure();
+      const { key, crt } = await this.secure();
       this.KEY = key;
       this.CRT = crt;
     }
 
-    const nginxConf = await fs.readFile(path.join(__dirname, 'stubs', nginxConfName));
-    let domainConf = nginxConf.toString()
+    const nginxConf = await fs.readFile(
+      path.join(__dirname, 'stubs', nginxConfName),
+    );
+    let domainConf = nginxConf
+      .toString()
       .replace('{{DOMAIN}}', this.DOMAIN)
       .replace('{{TARGET_PORT}}', this.PORT.toString());
 
@@ -53,13 +58,15 @@ export class Site {
 
   private async secure() {
     const openSSL = new OpenSSL(this.config, this.DOMAIN);
-    await openSSL.createCA()
+    await openSSL.createCA();
     return await openSSL.generateCertificate();
   }
 
-  private nginxDir () {
+  private nginxDir() {
     if (!this.config.nginx_dir || this.config.nginx_dir === '') {
-      console.warn('No nginx_dir defined on config file. Using ~/.config/nginx')
+      console.warn(
+        'No nginx_dir defined on config file. Using ~/.config/nginx',
+      );
       return path.join(os.homedir(), '.config', 'nginx');
     }
 
