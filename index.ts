@@ -53,11 +53,7 @@ async function createConfigFile() {
     return console.warn('A config file already exists.');
   }
 
-  const stubFile = devMode
-      ? path.join(__dirname, 'src', 'stubs', 'lc.config.json')
-      : path.join(__dirname, 'dist', 'src', 'stubs', 'lc.config.json');
-
-  const configStub = await Utils.readFile(stubFile);
+  const configStub = await Utils.readFile(path.join(__dirname, 'src', 'stubs', 'lc.config.json'));
   await Utils.createFile(path.join(__dirname, 'lc.config.json'), configStub);
 
   console.log('Config file created');
