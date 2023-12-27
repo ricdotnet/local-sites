@@ -38,11 +38,9 @@ const { domain, port, secure, init } = command.opts();
 })();
 
 async function importConfig() {
-  const configFile = devMode
-    ? path.join(__dirname, 'dev.lc.config.json')
-    : path.join(__dirname, '..', 'lc.config.json');
+  const configFile = devMode ? 'dev.lc.config.json' : 'lc.config.json';
   try {
-    return await import(configFile);
+    return await import(path.join(__dirname, configFile));
   } catch (_) {
     return console.error('You need to create a config file. Use localsite --init');
   }
