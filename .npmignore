@@ -4,8 +4,8 @@
 /src
 build.sh
 index.ts
-lc.config.json
-dev.lc.config.json
+/lc.config.json
+/dev.lc.config.json
 pnpm-lock.yaml
 tsconfig.json
 types.ts
