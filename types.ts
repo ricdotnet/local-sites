@@ -1,5 +1,4 @@
-export type Config = {
-  config_file: string;
+export type ConfigFile = {
   ssl_dir: string;
   nginx_dir: string;
   authority_name: string;

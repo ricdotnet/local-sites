@@ -1,11 +1,12 @@
 import fs from 'fs/promises';
 import path from 'path';
 import os from 'os';
-import { Config } from '../types';
+import { ConfigFile } from '../types';
 import { OpenSSL } from './openssl';
+import { Config } from './config';
 
 export class Site {
-  private readonly config: Config;
+  private readonly config: ConfigFile;
   private readonly DOMAIN: string;
   private readonly PORT: number;
   private readonly SECURE: boolean;
@@ -13,8 +14,8 @@ export class Site {
   private CRT: string | null = null;
   private KEY: string | null = null;
 
-  constructor(config: Config, domain: string, port: number, secure: boolean) {
-    this.config = config;
+  constructor(domain: string, port: number, secure: boolean) {
+    this.config = Config.instance().getConfigFile();
     this.DOMAIN = domain;
     this.PORT = port;
     this.SECURE = secure;
@@ -57,7 +58,7 @@ export class Site {
   }
 
   private async secure() {
-    const openSSL = new OpenSSL(this.config, this.DOMAIN);
+    const openSSL = new OpenSSL(this.DOMAIN);
     await openSSL.createCA();
     return await openSSL.generateCertificate();
   }

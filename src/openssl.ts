@@ -1,16 +1,16 @@
 import path from 'path';
 import fs from 'fs/promises';
 import os from 'os';
-import process from 'process';
-import { Config } from '../types';
+import { ConfigFile } from '../types';
 import { Utils } from './utils';
+import { Config } from './config';
 
 export class OpenSSL {
-  private readonly config: Config;
+  private readonly config: ConfigFile;
   private readonly DOMAIN: string;
 
-  constructor(config: Config, domain: string) {
-    this.config = config;
+  constructor(domain: string) {
+    this.config = Config.instance().getConfigFile();
     this.DOMAIN = domain;
   }
 
@@ -21,7 +21,7 @@ export class OpenSSL {
     let caPem = `${this.sslDir()}/${this.config.authority_name}.pem`;
     let caCert = `${this.sslDir()}/${this.config.authority_name}.crt`;
 
-    if (process.env.NODE_ENV === 'development') {
+    if (Utils.isDevMode()) {
       caKey = caKey.replace('.key', '__DEV__.key');
       caPem = caPem.replace('.pem', '__DEV__.pem');
       caCert = caCert.replace('.crt', '__DEV__.crt');
@@ -42,7 +42,9 @@ export class OpenSSL {
     await Utils.execp(
       `openssl req -x509 -nodes -new -sha256 -days 1024 -newkey rsa:2048 -keyout "${caKey}" -out "${caPem}" -subj "/C=GB/O=${this.config.organisation_name}/CN=${this.config.common_name}"`,
     );
-    await Utils.execp(`openssl x509 -outform pem -in "${caPem}" -out "${caCert}"`);
+    await Utils.execp(
+      `openssl x509 -outform pem -in "${caPem}" -out "${caCert}"`,
+    );
 
     console.log('Created Certificate Authority');
   }
@@ -70,7 +72,7 @@ export class OpenSSL {
     let caPem = `${this.sslDir()}/${this.config.authority_name}.pem`;
     let caKey = `${this.sslDir()}/${this.config.authority_name}.key`;
 
-    if (process.env.NODE_ENV === 'development') {
+    if (Utils.isDevMode()) {
       caKey = caKey.replace('.key', '__DEV__.key');
       caPem = caPem.replace('.pem', '__DEV__.pem');
     }
@@ -106,7 +108,7 @@ export class OpenSSL {
       this.config.authority_name,
     );
 
-    if (process.env.NODE_ENV === 'development') {
+    if (Utils.isDevMode()) {
       caCertificateCommonPath += '__DEV__';
     }
 

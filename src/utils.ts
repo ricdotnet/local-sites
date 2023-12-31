@@ -1,5 +1,6 @@
 import fs from 'fs/promises';
 import { exec } from 'child_process';
+import process from "process";
 
 export class Utils {
   static fileExists(path: string): Promise<boolean> {
@@ -46,5 +47,9 @@ export class Utils {
       });
       cmd.on('close', resolve);
     });
+  }
+
+  static isDevMode() {
+    return process.env.NODE_ENV === 'development';
   }
 }
