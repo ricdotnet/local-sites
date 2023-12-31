@@ -10,7 +10,7 @@ import { Error } from './src/error';
 
 const command: commander.Command = commander.createCommand();
 command
-  .version('0.3.1')
+  .version('0.3.2')
   .option('-d, --domain <domain>', 'Target domain for the certificate')
   .option('-p, --port <port>', 'Target port to proxy')
   .option('-s, --secure', 'Secure the domain with ssl')
