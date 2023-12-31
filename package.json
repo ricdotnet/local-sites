@@ -1,6 +1,6 @@
 {
   "name": "@ricdotnet/local-sites",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "A small package to help me with creating nginx sites and certificates for local development.",
   "keywords": [],
   "author": "Ricardo Rocha <me@rrocha.uk> (https://ricr.dev)",
